@@ -1,8 +1,8 @@
 import 'dart:io';
 
 void main() {
-  final directoryPath = 'E:\\root';
-  
+  final directoryPath = 'path'; //provide path here and use '\\' in between
+
   final directory = Directory(directoryPath);
 
   if (!directory.existsSync()) {
@@ -15,9 +15,10 @@ void main() {
 
 void printFilesRecursively(Directory directory) {
   String currentFolderName = directory.uri.pathSegments.last;
-  
+
   if (currentFolderName == '' || currentFolderName == '/') {
-    currentFolderName = directory.uri.pathSegments[directory.uri.pathSegments.length - 2];
+    currentFolderName =
+        directory.uri.pathSegments[directory.uri.pathSegments.length - 2];
   }
 
   for (var entity in directory.listSync()) {
@@ -25,7 +26,7 @@ void printFilesRecursively(Directory directory) {
       print('$currentFolderName - ${entity.uri.pathSegments.last}');
     }
   }
-  
+
   for (var entity in directory.listSync()) {
     if (entity is Directory) {
       printFilesRecursively(entity);
